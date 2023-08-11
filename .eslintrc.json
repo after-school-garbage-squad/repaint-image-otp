@@ -1,0 +1,6 @@
+{
+  "extends": ["@shiron4710/eslint-config", "@shiron4710/eslint-config/prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
