@@ -13,10 +13,10 @@
     "types": [
       "jest",
       "node"
-    ],
+    ]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.test.ts"
-  ],
+  ]
 }
