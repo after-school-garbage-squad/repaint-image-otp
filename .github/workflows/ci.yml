@@ -34,8 +34,8 @@ jobs:
         run: pnpm lint
       - name: Set up PostgreSQL
         run: |
-          apt-get update
-          apt-get install --yes --no-install-recommends postgresql-client
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends postgresql-client
       - name: Run SQL scripts
         run: |
           psql postgres://postgres:postgres@postgres:5432/postgres -f pg/init/init.sql
