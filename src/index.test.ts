@@ -138,7 +138,6 @@ describe("Token API", () => {
         };
 
         const res200 = await app.request(`/auth/is_login`, reqInit);
-        console.log(await res200.text());
         expect(res200.status).toBe(200);
 
         const resLimit = await app.request(
