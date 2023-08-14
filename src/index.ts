@@ -42,7 +42,7 @@ app.post("/token", async (c) => {
 app.get("/token", async (c) => {
   const url = c.req.query("url");
   if (url === undefined) {
-    return c.text("I'm a teapot", 418);
+    return c.text("Not found", 404);
   }
 
   const token = await TokenRepository.findTokenByUrl(url);
