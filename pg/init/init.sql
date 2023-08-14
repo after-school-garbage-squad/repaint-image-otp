@@ -1,7 +1,8 @@
 CREATE TABLE token_table (
     id SERIAL PRIMARY KEY,
-    url TEXT UNIQUE,
     token VARCHAR(64),
+    url TEXT UNIQUE,
+    limit_times INT,
     expires_at TIMESTAMP
 );
 

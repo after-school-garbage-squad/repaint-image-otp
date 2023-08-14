@@ -9,6 +9,14 @@ export async function findTokenById(id: number): Promise<Token | undefined> {
     .executeTakeFirst();
 }
 
+export async function findTokenByUrl(url: string): Promise<Token | undefined> {
+  return await db
+    .selectFrom("token_table")
+    .where("url", "=", url)
+    .selectAll()
+    .executeTakeFirst();
+}
+
 export async function findToken(criteria: Partial<Token>): Promise<Token[]> {
   let query = db.selectFrom("token_table");
 

@@ -10,8 +10,9 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
 export interface TokenTable {
   id: Generated<number>;
-  url: string | null;
   token: string | null;
+  url: string | null;
+  limit_times: number | null;
   expires_at: Timestamp | null;
 }
 
