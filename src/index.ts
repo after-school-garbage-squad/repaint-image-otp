@@ -76,38 +76,39 @@ app.get("/auth/is_login", async (c) => {
     const url = new URL(requestUrl);
     const baseUrl = url.origin + url.pathname;
     const token = await TokenRepository.findTokenByUrl(baseUrl);
+
     if (
       // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-      token !== undefined &&
-      token.token !== null &&
-      token.expires_at !== null &&
-      token.limit_times !== null
+      token === undefined ||
+      token.token === null ||
+      token.expires_at === null ||
+      token.limit_times === null
     ) {
-      if (token.token === url.searchParams.get("token")) {
-        if (
-          token.expires_at !== null &&
-          token.expires_at.getTime() > new Date().getTime()
-        ) {
-          if (token.limit_times > 0) {
-            token.limit_times -= 1;
-            if (token.limit_times === 0) {
-              token.token = null;
-              token.expires_at = null;
-            }
-            await TokenRepository.updateToken(token.id, { ...token });
-            return c.text("OK", 200);
-          } else {
-            return c.text("Token is expired", 401);
-          }
-        } else {
-          return c.text("Token is expired", 401);
-        }
-      } else {
-        return c.text("Invalid token", 401);
-      }
-    } else {
       return c.text("Unauthorized", 401);
     }
+
+    if (token.token === url.searchParams.get("token")) {
+      return c.text("Invalid token", 401);
+    }
+
+    if (
+      token.expires_at === null ||
+      token.expires_at.getTime() < new Date().getTime()
+    ) {
+      return c.text("Token is expired", 401);
+    }
+
+    if (token.limit_times <= 0) {
+      return c.text("Token is expired", 401);
+    }
+
+    token.limit_times -= 1;
+    if (token.limit_times === 0) {
+      token.token = null;
+      token.expires_at = null;
+    }
+    await TokenRepository.updateToken(token.id, { ...token });
+    return c.text("OK", 200);
   }
 });
 
