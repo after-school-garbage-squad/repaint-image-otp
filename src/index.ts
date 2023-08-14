@@ -87,7 +87,7 @@ app.get("/auth/is_login", async (c) => {
       return c.text("Unauthorized", 401);
     }
 
-    if (token.token === url.searchParams.get("token")) {
+    if (token.token !== url.searchParams.get("token")) {
       return c.text("Invalid token", 401);
     }
 
