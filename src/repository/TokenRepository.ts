@@ -57,11 +57,3 @@ export async function createToken(Token: NewToken): Promise<Token> {
     .returningAll()
     .executeTakeFirstOrThrow();
 }
-
-export async function deleteToken(id: number): Promise<Token | undefined> {
-  return await db
-    .deleteFrom("token_table")
-    .where("id", "=", id)
-    .returningAll()
-    .executeTakeFirst();
-}

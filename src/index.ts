@@ -6,7 +6,7 @@ import * as TokenRepository from "./repository/TokenRepository";
 export const TOKEN_LENGTH = 16;
 export const LIFE_TIME = 1000 * 60 * 60 * 24 * 7;
 
-const app = new Hono();
+export const app = new Hono();
 app.get("/", (c) => c.text("Hello Hono!"));
 
 app.post("/token", async (c) => {
@@ -111,4 +111,4 @@ app.get("/auth/is_login", async (c) => {
   }
 });
 
-serve(app);
+export const server = serve(app);
