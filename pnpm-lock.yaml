@@ -1,12 +1,16 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@hono/node-server':
     specifier: ^1.1.1
     version: 1.1.1
   hono:
-    specifier: ^3.4.2
-    version: 3.4.2
+    specifier: ^3.4.3
+    version: 3.4.3
   kysely:
     specifier: ^0.26.1
     version: 0.26.1
@@ -2655,8 +2659,8 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /hono@3.4.2:
-    resolution: {integrity: sha512-HvJta4dszWVaUOHhQKfdha2dWgVnrznxglqIh8X0mypJ2Jkb3wVd9OAMhsgeak67+SVfUbr0EQyI3woO4U5OlQ==}
+  /hono@3.4.3:
+    resolution: {integrity: sha512-HbVxZh9yC3hV25+mFjUaM65t7g8ia2mXbhAGmVHA0r8+guizTJq1Cg4f2SmB5+JrviG0vaqOnWJ9U3O05aikbA==}
     engines: {node: '>=16.0.0'}
     dev: false
 
