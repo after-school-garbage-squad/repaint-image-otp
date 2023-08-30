@@ -12,7 +12,7 @@ dependencies:
     specifier: ^3.5.4
     version: 3.5.4
   kysely:
-    specifier: ^0.26.2
+    specifier: ^0.26.3
     version: 0.26.3
   pg:
     specifier: ^8.11.3
