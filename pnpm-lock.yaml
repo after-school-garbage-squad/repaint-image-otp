@@ -9,7 +9,7 @@ dependencies:
     specifier: ^1.1.1
     version: 1.1.1
   hono:
-    specifier: ^3.5.7
+    specifier: ^3.5.8
     version: 3.5.8
   kysely:
     specifier: ^0.26.3
