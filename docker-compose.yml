@@ -1,10 +1,10 @@
 services:
   nginx:
-    image: nginx:alpine
+    build:
+      dockerfile: ./nginx/Dockerfile
+      context: ./
     ports:
       - "80:80"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
   postgres:
     image: postgres:latest
     ports:

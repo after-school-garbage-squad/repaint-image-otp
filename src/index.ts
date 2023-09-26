@@ -3,6 +3,8 @@ import { Hono } from "hono";
 import { calcTokenExpiration, generateRandomToken } from "./token";
 import * as TokenRepository from "./repository/TokenRepository";
 
+const env = process.env;
+
 export const TOKEN_LENGTH = 16;
 export const LIFE_TIME = 1000 * 60 * 60 * 24 * 7;
 
@@ -119,4 +121,7 @@ app.get("/auth/is_login", async (c) => {
   }
 });
 
-export const server = serve(app);
+export const server = serve({
+  fetch: app.fetch,
+  port: Number(env.PORT ?? 8080),
+});
