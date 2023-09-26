@@ -2,14 +2,16 @@ import { type DB } from "./types"; // this is the Database interface we defined 
 import { Pool } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
 
+const env = process.env;
+
 const dialect = new PostgresDialect({
   pool: new Pool({
-    database: "postgres",
-    host: "localhost",
-    user: "postgres",
-    password: "postgres",
-    port: 5432,
-    max: 10,
+    database: env.DATABASE_NAME,
+    host: env.DATABASE_HOST,
+    user: env.DATABASE_USER,
+    password: env.DATABASE_PASSWORD,
+    port: Number(env.DATABASE_PORT),
+    max: Number(env.DATABASE_MAX_CONNECTIONS),
   }),
 });
 
