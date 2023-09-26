@@ -35,8 +35,11 @@ app.post("/token", async (c) => {
       expires_at: calcTokenExpiration(),
     });
   }
-
-  return c.json(token);
+  const ret = {
+    full: `${url}?token=${token.token ?? ""}`,
+    ...token,
+  };
+  return c.json(ret);
 });
 
 app.get("/token", async (c) => {
@@ -65,7 +68,11 @@ app.delete("/token", async (c) => {
     await TokenRepository.updateToken(token.id, { ...token });
   }
 
-  return c.json(token);
+  const ret = {
+    full: `${url}?token=${token.token ?? ""}`,
+    ...token,
+  };
+  return c.json(ret);
 });
 
 app.get("/auth/is_login", async (c) => {
