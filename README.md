@@ -10,6 +10,7 @@
 レスポンス
 ```json 
 {
+    "full": "https://example.com/abcde?token=a86752fd9b0cebcd18c9a61a6fb94a58",
     "id": 1,
     "token": "a86752fd9b0cebcd18c9a61a6fb94a58",
     "url": "https://example.com/abcde",
@@ -27,6 +28,7 @@
 レスポンス
 ```json
 {
+    "full": "https://example.com/abcde?token=a86752fd9b0cebcd18c9a61a6fb94a58",
     "id": 1,
     "token": "a86752fd9b0cebcd18c9a61a6fb94a58",
     "url": "https://example.com/abcde",
