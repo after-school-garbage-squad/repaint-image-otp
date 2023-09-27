@@ -26,8 +26,8 @@ devDependencies:
     specifier: ^29.5.5
     version: 29.5.5
   '@types/pg':
-    specifier: ^8.10.2
-    version: 8.10.2
+    specifier: ^8.10.3
+    version: 8.10.3
   eslint:
     specifier: ^8.50.0
     version: 8.50.0
@@ -1106,8 +1106,8 @@ packages:
     resolution: {integrity: sha512-Mgq7eCtoTjT89FqNoTzzXg2XvCi5VMhRV6+I2aYanc6kQCBImeNaAYRs/DyoVqk1YEUJK5gN9VO7HRIdz4Wo3Q==}
     dev: true
 
-  /@types/pg@8.10.2:
-    resolution: {integrity: sha512-MKFs9P6nJ+LAeHLU3V0cODEOgyThJ3OAnmOlsZsxux6sfQs3HRXR5bBn7xG5DjckEFhTAxsXi7k7cd0pCMxpJw==}
+  /@types/pg@8.10.3:
+    resolution: {integrity: sha512-BACzsw64lCZesclRpZGu55tnqgFAYcrCBP92xLh1KLypZLCOsvJTSTgaoFVTy3lCys/aZTQzfeDxtjwrvdzL2g==}
     dependencies:
       '@types/node': 20.5.0
       pg-protocol: 1.6.0
