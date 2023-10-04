@@ -1,10 +1,10 @@
-FROM node:20
+FROM python:alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY ./main.py /app/main.py
+COPY ./requirements.txt /app/requirements.txt
 
-COPY . .
+RUN pip install -r /app/requirements.txt
 
-CMD [ "npm", "start"]
+CMD ["python", "/app/main.py"]
