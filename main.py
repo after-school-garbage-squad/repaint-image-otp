@@ -100,4 +100,4 @@ def is_login():
         return jsonify({"message": "Authenticated"}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, port=port)
+    app.run(debug=True, host="0.0.0.0", port=port)
