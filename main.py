@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.environ['DATABASE_USER']}:{os.environ['DATABASE_PASSWORD']}@{os.environ['DATABASE_HOST']}/{os.environ['DATABASE_NAME']}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+port = int(os.environ.get("PORT", 5000))
 
 # トークンテーブルのモデル
 class Token(db.Model):
@@ -99,4 +100,4 @@ def is_login():
         return jsonify({"message": "Authenticated"}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=port)
