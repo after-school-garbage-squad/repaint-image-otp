@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from urllib.parse import urlparse, parse_qs
+import secrets
+import time
 
 app = Flask(__name__)
 
@@ -10,6 +12,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.environ['DATABASE_USE
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 port = int(os.environ.get("PORT", 8080))
+
+EXPIRES_TIME = 60 * 60 * 24 * 7
 
 # トークンテーブルのモデル
 class Token(db.Model):
@@ -26,12 +30,12 @@ def generate_token():
     limit_times = int(request.args.get('limit_times', 1))
     
     # トークンをデータベースに保存
-    new_token = Token(token="a86752fd9b0cebcd18c9a61a6fb94a58", url=url, limit_times=limit_times, expires_at="2023-08-21T14:51:16.198Z")
+    new_token = Token(token=secrets.token_hex(), url=url, limit_times=limit_times, expires_at=time.time() + EXPIRES_TIME)
     db.session.add(new_token)
     db.session.commit()
     
     response = {
-        "full": f"https://example.com/abcde?token={new_token.token}",
+        "full": f"{new_token.url}?token={new_token.token}",
         "id": new_token.id,
         "token": new_token.token,
         "url": new_token.url,
@@ -50,7 +54,7 @@ def get_token():
         return jsonify({"error": "Token not found"}), 404
     
     response = {
-        "full": f"https://example.com/abcde?token={token_entry.token}",
+        "full": f"{token_entry.url}?token={token_entry.token}",
         "id": token_entry.id,
         "token": token_entry.token,
         "url": token_entry.url,
