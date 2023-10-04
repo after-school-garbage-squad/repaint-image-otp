@@ -1,4 +1,4 @@
-CREATE TABLE token_table (
+CREATE TABLE token (
     id SERIAL PRIMARY KEY,
     token VARCHAR(64),
     url TEXT UNIQUE,
@@ -6,4 +6,4 @@ CREATE TABLE token_table (
     expires_at TIMESTAMP
 );
 
-CREATE INDEX idx_url ON token_table(url);
+CREATE INDEX idx_url ON token(url);
