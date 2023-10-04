@@ -31,7 +31,15 @@ def generate_token():
     
     # トークンをデータベースに保存
     new_token = Token(token=secrets.token_hex(), url=url, limit_times=limit_times, expires_at=time.time() + EXPIRES_TIME)
-    db.session.add(new_token)
+
+    token_entry = Token.query.filter_by(url=url).first()
+    
+    if token_entry is None:
+        db.session.add(new_token)
+    else:
+        token_entry.token = new_token.token
+        token_entry.limit_times = new_token.limit_times
+        token_entry.expires_at = new_token.expires_at
     db.session.commit()
     
     response = {
