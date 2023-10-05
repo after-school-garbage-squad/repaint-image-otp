@@ -36,11 +36,14 @@ def generate_token():
     
     if token_entry is None:
         db.session.add(new_token)
+        db.session.commit()
+        db.session.refresh(new_token)
+        token_entry = new_token
     else:
         token_entry.token = new_token.token
         token_entry.limit_times = new_token.limit_times
         token_entry.expires_at = new_token.expires_at
-    db.session.commit()
+        db.session.commit()
     
     response = {
         "full": f"{token_entry.url}?token={token_entry.token}",
