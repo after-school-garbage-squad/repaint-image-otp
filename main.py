@@ -100,7 +100,7 @@ def is_login():
 
     token_entry = Token.query.filter_by(url=url).first()
     if token_entry is None:
-        return jsonify({"error": "Token not found"}), 404
+        return jsonify({"error": "Token not found"}), 401
     
     if token_entry.token != query_parameters["token"][0] or token_entry.limit_times == 0:
         return jsonify({"error": "Token is invalid"}), 401
