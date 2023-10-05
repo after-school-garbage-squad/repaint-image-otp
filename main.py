@@ -6,6 +6,7 @@ import secrets
 import datetime
 
 app = Flask(__name__)
+app.logger.info('INFO')
 
 # データベース設定
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.environ['DATABASE_USER']}:{os.environ['DATABASE_PASSWORD']}@{os.environ['DATABASE_HOST']}/{os.environ['DATABASE_NAME']}"
@@ -99,8 +100,8 @@ def is_login():
     query_parameters = parse_qs(parsed_url.query)
 
     token_entry = Token.query.filter_by(url=url).first()
-    print(url, token_entry)
-    
+    app.logger.info('%s - %s - %s - %s', request_url, token_entry.id, token_entry.token, token_entry.limit_times)
+
     if token_entry is None:
         return jsonify({"error": "Token not found"}), 401
     
