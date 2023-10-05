@@ -46,7 +46,7 @@ def generate_token():
         db.session.commit()
     
     response = {
-        "full": f"{token_entry.url}?token={token_entry.token}",
+        "full": f"{request_url}?token={token_entry.token}",
         "id": token_entry.id,
         "token": token_entry.token,
         "url": token_entry.url,
@@ -67,7 +67,7 @@ def get_token():
         return jsonify({"error": "Token not found"}), 404
     
     response = {
-        "full": f"{token_entry.url}?token={token_entry.token}",
+        "full": f"{request_url}?token={token_entry.token}",
         "id": token_entry.id,
         "token": token_entry.token,
         "url": token_entry.url,
