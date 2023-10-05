@@ -27,7 +27,7 @@ def generate_token():
     request_url = request.args.get('url')
     parsed_url = urlparse(request_url)
     url = parsed_url.hostname + parsed_url.path
-    limit_times = int(request.args.get('limit_times', 1))
+    limit_times = int(request.args.get('limit_times', 2))
     
     # トークンをデータベースに保存
     new_token = Token(token=secrets.token_hex(), url=url, limit_times=limit_times, expires_at=datetime.datetime.now() + datetime.timedelta(days=3))
