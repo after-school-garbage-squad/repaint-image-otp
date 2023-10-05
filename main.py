@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from urllib.parse import urlparse, parse_qs
 import secrets
-import time
+import datetime
+from dateutil import relativedelta
 
 app = Flask(__name__)
 
@@ -12,8 +13,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.environ['DATABASE_USE
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 port = int(os.environ.get("PORT", 8080))
-
-EXPIRES_TIME = 60 * 60 * 24 * 7
 
 # トークンテーブルのモデル
 class Token(db.Model):
@@ -30,7 +29,7 @@ def generate_token():
     limit_times = int(request.args.get('limit_times', 1))
     
     # トークンをデータベースに保存
-    new_token = Token(token=secrets.token_hex(), url=url, limit_times=limit_times, expires_at=time.time() + EXPIRES_TIME)
+    new_token = Token(token=secrets.token_hex(), url=url, limit_times=limit_times, expires_at=datetime.datetime.now() + datetime.timedelta(days=3))
 
     token_entry = Token.query.filter_by(url=url).first()
     
