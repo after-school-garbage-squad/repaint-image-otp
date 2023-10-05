@@ -94,6 +94,7 @@ def delete_token():
 @app.route('/auth/is_login', methods=['GET'])
 def is_login():
     request_url = request.headers.get('request-url')
+    print(request_url)
     parsed_url = urlparse(request_url)
     url = parsed_url.scheme + "://" + parsed_url.hostname + parsed_url.path
     query_parameters = parse_qs(parsed_url.query)
@@ -103,7 +104,7 @@ def is_login():
         return jsonify({"error": "Token not found"}), 401
     
     if token_entry.token != query_parameters["token"][0] or token_entry.limit_times == 0:
-        return jsonify({"error": "Token is invalid"}), 401
+        return jsonify({"error": "Token is invalid"}), 403
     else:
         token_entry.limit_times -= 1
         db.session.commit()
