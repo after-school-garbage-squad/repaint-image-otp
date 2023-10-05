@@ -41,12 +41,12 @@ def generate_token():
     db.session.commit()
     
     response = {
-        "full": f"{new_token.url}?token={new_token.token}",
-        "id": new_token.id,
-        "token": new_token.token,
-        "url": new_token.url,
-        "limit_times": new_token.limit_times,
-        "expires_at": new_token.expires_at
+        "full": f"{token_entry.url}?token={token_entry.token}",
+        "id": token_entry.id,
+        "token": token_entry.token,
+        "url": token_entry.url,
+        "limit_times": token_entry.limit_times,
+        "expires_at": token_entry.expires_at
     }
     return jsonify(response)
 
