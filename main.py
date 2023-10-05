@@ -24,7 +24,9 @@ class Token(db.Model):
 # Token APIのエンドポイント
 @app.route('/token', methods=['POST'])
 def generate_token():
-    url = request.args.get('url')
+    request_url = request.args.get('url')
+    parsed_url = urlparse(request_url)
+    url = parsed_url.hostname + parsed_url.path
     limit_times = int(request.args.get('limit_times', 1))
     
     # トークンをデータベースに保存
@@ -53,7 +55,9 @@ def generate_token():
 # GET Token APIのエンドポイント
 @app.route('/token', methods=['GET'])
 def get_token():
-    url = request.args.get('url')
+    request_url = request.args.get('url')
+    parsed_url = urlparse(request_url)
+    url = parsed_url.hostname + parsed_url.path
     token_entry = Token.query.filter_by(url=url).first()
     
     if token_entry is None:
@@ -72,7 +76,9 @@ def get_token():
 # DELETE Token APIのエンドポイント
 @app.route('/token', methods=['DELETE'])
 def delete_token():
-    url = request.args.get('url')
+    request_url = request.args.get('url')
+    parsed_url = urlparse(request_url)
+    url = parsed_url.hostname + parsed_url.path
     token_entry = Token.query.filter_by(url=url).first()
     
     if token_entry is None:
@@ -95,7 +101,7 @@ def delete_token():
 def is_login():
     request_url = request.headers.get('request-url')
     parsed_url = urlparse(request_url)
-    url = parsed_url.scheme + "://" + parsed_url.hostname + parsed_url.path
+    url = parsed_url.hostname + parsed_url.path
     query_parameters = parse_qs(parsed_url.query)
     app.logger.warning('%s - %s - %s', request_url, parsed_url, query_parameters)
 
