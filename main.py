@@ -4,7 +4,6 @@ import os
 from urllib.parse import urlparse, parse_qs
 import secrets
 import datetime
-from dateutil import relativedelta
 
 app = Flask(__name__)
 
