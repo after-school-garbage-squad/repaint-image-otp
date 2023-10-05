@@ -94,12 +94,13 @@ def delete_token():
 @app.route('/auth/is_login', methods=['GET'])
 def is_login():
     request_url = request.headers.get('request-url')
-    print(request_url)
     parsed_url = urlparse(request_url)
     url = parsed_url.scheme + "://" + parsed_url.hostname + parsed_url.path
     query_parameters = parse_qs(parsed_url.query)
 
     token_entry = Token.query.filter_by(url=url).first()
+    print(url, token_entry)
+    
     if token_entry is None:
         return jsonify({"error": "Token not found"}), 401
     
