@@ -102,11 +102,14 @@ def delete_token():
 
 @app.route('/auth/is_login', methods=['GET'])
 def is_login():
-    request_url = request.headers.get('request-url')
-    parsed_url = urlparse(request_url)
-    url = parsed_url.hostname + parsed_url.path
-    query_parameters = parse_qs(parsed_url.query)
-    app.logger.warning('%s - %s - %s', request_url, parsed_url, query_parameters)
+    try:
+        request_url = request.headers.get('request-url')
+        parsed_url = urlparse(request_url)
+        url = parsed_url.hostname + parsed_url.path
+        query_parameters = parse_qs(parsed_url.query)
+        app.logger.warning('%s - %s - %s', request_url, parsed_url, query_parameters)
+    except:
+        return jsonify({"error": "Invalid request"}), 400
 
     token_entry = Token.query.filter_by(url=url).first()
 
